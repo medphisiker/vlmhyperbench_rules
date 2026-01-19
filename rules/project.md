@@ -59,11 +59,15 @@ VLMHyperBench — это open-source фреймворк для оценки во
     *   Запуск Docker-контейнера оценки -> Монтирование ответов -> `run_eval.py` -> Расчет метрик (CSV).
 
 ## Документация и Решения (ADR)
-Ключевые архитектурные решения и концепции задокументированы в папке `docs/docs_new/`:
+Основная документация проекта перенесена в `docs_site/` и публикуется через Docusaurus.
 
-*   **Архитектурная концепция**: [`docs/docs_new/01_architecture_concept.md`](docs/docs_new/01_architecture_concept.md) — Основной документ, описывающий модульную архитектуру, изоляцию и взаимодействие компонентов.
-*   **Architecture Decision Records (ADR)**: [`docs/docs_new/09_architecture_decision_records.md`](docs/docs_new/09_architecture_decision_records.md) — Фиксация важных технических решений (изоляция, динамические зависимости, API wrapper).
-*   **Сравнительный анализ**: [`docs/docs_new/10_comparative_analysis.md`](docs/docs_new/10_comparative_analysis.md) — Сравнение с EvalScope и другими фреймворками.
+*   **Архитектура**:
+    *   [`docs_site/docs/architecture/concept.md`](docs_site/docs/architecture/concept.md) — Основная концепция и диаграммы.
+    *   [`docs_site/docs/architecture/specification.md`](docs_site/docs/architecture/specification.md) — Детальная спецификация компонентов.
+    *   [`docs_site/docs/architecture/adr/`](docs_site/docs/architecture/adr/) — Architecture Decision Records (ADR).
+*   **Исследования**:
+    *   [`docs_site/docs/research/archive/`](docs_site/docs/research/archive/) — Архив проведенных исследований (S3, EvalScope, Metrics).
+    *   [`docs_site/docs/research/comparative-analysis.md`](docs_site/docs/research/comparative-analysis.md) — Сравнительный анализ с аналогами.
 
 ## Инструменты (Tools)
 Вспомогательные инструменты для разработки и CI/CD находятся в директории `tools/`:
