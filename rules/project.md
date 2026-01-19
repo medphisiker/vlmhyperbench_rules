@@ -78,3 +78,5 @@ VLMHyperBench — это open-source фреймворк для оценки во
 *   **PlantUML Renderer** (`tools/plantuml-docker-renderer`):
     *   Docker-контейнер для локального рендеринга диаграмм PlantUML.
     *   Используется для генерации изображений для документации.
+*   **Limited Tree** (`tools/limited_tree.py`):
+    *   Утилита для отображения ограниченного дерева файлов проекта.
