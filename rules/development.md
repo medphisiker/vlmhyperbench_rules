@@ -4,7 +4,7 @@
 
 ## Принципы архитектуры
 1.  **Async-First**: Все сетевые вызовы (API Wrapper, DB, WebSockets) должны быть асинхронными.
-2.  **BFF (Backend for Frontend)**: API сервер подготавливает данные для визуализации (Plotly JSON) на стороне бэкенда.
+2.  **BFF (Backend for Frontend)**: Backend подготавливает данные для визуализации (Plotly JSON) на стороне сервера.
 3.  **Strict Validation**: Любой структурированный вывод модели должен валидироваться через Pydantic.
 
 ## Workflow разработки (Playground -> Production)
@@ -22,7 +22,7 @@
 ### 2. Этап Integration (Подключение модулей)
 *   **Что делаем**:
     *   Монтируем необходимые репозитории (с реализациями конкретных `Task`, `Model`, `Metric`) как **git submodules** в папку `packages/`.
-    *   Пример: `packages/model-qwen2-5-vl`, `packages/bench-utils`.
+    *   Пример: `packages/api-wrapper`, `packages/bench-utils`.
     *   Разрабатываем реализации для конкретных задач, используя базовые абстракции из ядра.
 
 ### 3. Этап Pipeline & Testing
