@@ -3,33 +3,34 @@
 ## Обзор проекта
 VLMHyperBench — это open-source фреймворк для оценки возможностей Vision Language Models (VLM), с акцентом на распознавание документов (включая русский язык). Инструмент позволяет исследователям и инженерам сравнивать модели, запускаемые на различных фреймворках (Hugging Face, vLLM, SGLang), в изолированных окружениях.
 
-## Архитектура
-Система построена на модульной архитектуре, где каждый этап (инференс модели, оценка метрик) выполняется в изолированном Docker-контейнере.
+## Архитектура (v0.2.0)
+VLMHyperBench трансформировался в полноценную платформу с разделением на Management, Execution и Inference слои.
 
 ### Основные сущности и компоненты
 
-#### 1. Orchestrator (`BenchmarkOrchestrator`)
-*   **Локация**: `VLMHyperBench/benchmark_scheduler/benchmark_orchestrator.py`
-*   **Функции**:
-    *   Центральный управляющий элемент.
-    *   Считывает глобальную конфигурацию и список задач.
-    *   Проверяет и скачивает необходимые Docker-образы.
-    *   Запускает контейнеры для этапов инференса и оценки, монтируя необходимые директории (volumes).
+#### 1. Management Plane
+*   **API Server (FastAPI)**: Центр управления экспериментами, база данных и BFF для аналитики.
+*   **Web UI (React)**: Интерактивный дашборд для мониторинга в реальном времени и визуализации метрик (Plotly).
+
+#### 2. Execution Plane (Orchestrator)
+*   **BenchmarkPlanner**: Создает граф задач и управляет жизненным циклом бенчмарка.
+*   **TaskTracker**: Мониторит состояния этапов (Planning, Inference, Evaluation, Reporting).
+*   **EventBus**: Обеспечивает real-time стриминг событий выполнения.
 
 #### 2. Configuration Management
 *   **User Config**: Пользователь задает задачи в CSV файле (например, `user_config_model_eval.csv`), указывая датасет, модель, промпты и метрики.
 *   **VLM Base**: Реестр моделей (`vlmhyperbench/vlm_base.csv`) хранит технические детали: имя Docker-образа, python-пакеты и классы для инициализации конкретной модели.
 *   **UserConfigReader**: Класс (`VLMHyperBench/benchmark_scheduler/user_config_reader.py`), объединяющий пользовательский конфиг с базой VLM для создания полных конфигураций запуска (`BenchmarkRunConfig`).
 
-#### 3. Этапы выполнения (Stages)
-Скрипты этапов находятся в `VLMHyperBench/vlmhyperbench/system_dirs/bench_stages/` и монтируются в контейнеры.
+#### 3. Inference Layer (API Wrapper)
+*   **API Wrapper**: FastAPI Proxy, унифицирующий доступ к vLLM, SGLang и HF через OpenAI-совместимый протокол.
+*   **Structured Output**: Поддержка JSON Schema и Regex через `response_format` и `constrained decoding`.
+*   **PromptManager**: Динамический выбор промптов на основе типа документа.
 
-*   **Stage: Run VLM (Инференс)**
-    *   **Скрипт**: `run_vlm.py`
-    *   **Описание**: Запускается внутри контейнера с GPU. Инициализирует модель через `ModelFactory`, создает итератор по датасету (`IteratorFabric`) и сохраняет ответы модели.
-*   **Stage: Eval Metrics (Оценка)**
-    *   **Скрипт**: `run_eval.py` (подразумевается архитектурой)
-    *   **Описание**: Запускается внутри легковесного контейнера (`metric-evaluator`). Сравнивает ответы модели с эталонными значениями (Ground Truth) и считает метрики.
+#### 4. Evaluation Layer
+*   **DataParser**: Валидация JSON-ответов через **Pydantic**.
+*   **Метрики**: Иерархия текстовых, структурных и классификационных метрик.
+*   **Structural Fidelity**: Метрика валидности формата вывода.
 
 ## Структура директорий (VLMHyperBench)
 
