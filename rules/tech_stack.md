@@ -21,6 +21,6 @@
 *   **tavily**: Для поиска лучших практик и архитектурных решений в интернете.
 
 ## Внутренние инструменты
-*   `tools/release_tool`: Автоматизация релизов.
+*   **GitHub MCP Server**: Используется для управления репозиториями, релизами и PR в организации [VLMHyperBenchTeam](https://github.com/VLMHyperBenchTeam).
 *   `tools/plantuml-docker-renderer`: Рендеринг диаграмм.
 *   `tools/limited_tree.py`: Просмотр структуры проекта.
