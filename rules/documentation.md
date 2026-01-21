@@ -40,3 +40,12 @@
 ### 4. Документирование архитектурных решений (ADR)
 *   Все важные технические решения фиксируются в формате **ADR (Architecture Decision Records)**.
 *   Место хранения: `docs_site/docs/architecture/adr/`.
+
+## Карта документации
+*   **Архитектура**:
+    *   [`docs_site/docs/architecture/concept.md`](docs_site/docs/architecture/concept.md) — Основная концепция и диаграммы.
+    *   [`docs_site/docs/architecture/specification.md`](docs_site/docs/architecture/specification.md) — Детальная спецификация компонентов.
+    *   [`docs_site/docs/architecture/adr/`](docs_site/docs/architecture/adr/) — Architecture Decision Records (ADR).
+*   **Исследования**:
+    *   [`docs_site/docs/research/archive/`](docs_site/docs/research/archive/) — Архив проведенных исследований (S3, EvalScope, Metrics).
+    *   [`docs_site/docs/research/comparative-analysis.md`](docs_site/docs/research/comparative-analysis.md) — Сравнительный анализ с аналогами.
